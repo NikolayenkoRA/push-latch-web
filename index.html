@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Генератор защёлок push-to-open для 3D-печати</title>
+  <meta name="description" content="Параметрический генератор механизмов push-push (push-to-open): сердечко с качающимся рычагом и поворотный кулачок как в шариковой ручке. STL прямо в браузере." />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='8' y='6' width='48' height='52' rx='6' fill='%23f5c518'/%3E%3Cpath d='M32 50 L14 26 Q18 12 32 22 Q46 12 50 26 Z' fill='none' stroke='%23d9363e' stroke-width='6'/%3E%3C/svg%3E" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <svg viewBox="0 0 64 64" width="30" height="30" aria-hidden="true"><rect x="8" y="6" width="48" height="52" rx="6" fill="#f5c518"/><path d="M32 50 L14 26 Q18 12 32 22 Q46 12 50 26 Z" fill="none" stroke="#d9363e" stroke-width="6"/></svg>
+      <div>
+        <h1>Push-to-open: генератор защёлок</h1>
+        <p class="sub">Нажал — защёлкнулось, нажал ещё раз — отпустило. Параметрически, STL для 3D-печати</p>
+      </div>
+    </div>
+  </header>
+  <main class="layout">
+    <section class="viewer-wrap">
+      <div class="viewer-bar">
+        <div class="seg" id="variant-seg">
+          <button type="button" data-variant="heart">Сердечко + рычаг</button>
+          <button type="button" data-variant="rotary">Поворотный кулачок (как в ручке)</button>
+        </div>
+        <div class="seg" id="view-seg">
+          <button type="button" data-view="asm">Сборка</button>
+          <button type="button" data-view="print">Раскладка для печати</button>
+        </div>
+      </div>
+      <div id="viewer" class="viewer" aria-label="3D"></div>
+      <div class="anim card">
+        <button type="button" id="play" class="btn primary">⏸ Пауза</button>
+        <input type="range" id="phase" min="0" max="1000" value="0" aria-label="Фаза цикла" />
+        <span id="phase-label" class="phase-label"></span>
+        <label class="chk"><input type="checkbox" id="xray" /> Рентген (корпус и рычаг полупрозрачные)</label>
+      </div>
+      <div class="row2">
+        <div class="card groove-card">
+          <h2>Траектория штифта в пазу (развёртка)</h2>
+          <canvas id="groove" width="520" height="300"></canvas>
+          <p class="hint">Синие участки идут вдоль оси нажатия: после каждой смены направления штифт без бокового усилия попадает в нужную ветку. Повороты делают только наклонные стенки.</p>
+        </div>
+        <div class="card">
+          <h2>Проверка</h2>
+          <div id="status" class="status"></div>
+        </div>
+      </div>
+      <div class="downloads card">
+        <h2>Скачать STL (уже в положении для печати)</h2>
+        <div class="dl-buttons" id="dl-buttons"></div>
+        <p class="hint" id="print-hint"></p>
+      </div>
+    </section>
+    <aside class="panel" id="panel"></aside>
+  </main>
+  <footer class="footer"><p class="meta">MIT · © 2026 Роман Николаенко · работает полностью в браузере (manifold-3d + three.js)</p></footer>
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
